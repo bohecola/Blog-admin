@@ -80,7 +80,21 @@
         password: [ v => !!v || 'Password is required', ],
       },
       loading: false,
+      redirect: undefined,
+      otherQuery: {}
     }),
+    watch: {
+      $route: {
+        handler: function(route) {
+          const query = route.query
+          if (query) {
+            this.redirect = query.redirect
+            this.otherQuery = this.getOtherQuery(query)
+          }
+        },
+        immediate: true
+      }
+    },
     beforeCreate () {
       document.querySelector('html').setAttribute('style', 'overflow-y:auto')
     },
@@ -98,7 +112,7 @@
             this.$store.dispatch('getInfo').then(() => {
               console.log(this.$store.getters)
             })
-            this.$router.push({ path: '/'})
+            this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             this.loading = false
           })
           .catch(() => {
@@ -112,6 +126,14 @@
       resetValidation () {
         this.$refs.form.resetValidation()
       },
+      getOtherQuery(query) {
+        return Object.keys(query).reduce((acc, cur) => {
+          if (cur !== 'redirect') {
+            acc[cur] = query[cur]
+          }
+          return acc
+        }, {})
+      }      
     },
   }
 </script>

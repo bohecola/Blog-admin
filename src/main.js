@@ -8,6 +8,7 @@ import Message from 'vue-m-message'
 import 'vue-m-message/dist/index.css'
 
 import './permission'
+import "./scss/app.scss"
 
 Vue.use(Message)
 

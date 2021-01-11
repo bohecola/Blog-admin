@@ -3,15 +3,17 @@ import Vuex from 'vuex'
 import getters from './getters'
 import mutations from './mutations'
 import actions from './actions'
-import { getToken } from '@/utils/auth'
+import { getToken, getUser } from '@/utils/auth'
  
 Vue.use(Vuex)
 
+let userInfo = getUser()
+
 const state = {
   token: getToken(),
-  name: '',
-  avatar: '',
-  introduction: '',
+  name: userInfo === null ? userInfo : userInfo.name,
+  avatar: userInfo === null ? userInfo : userInfo.avatar,
+  introduction: userInfo === null ? userInfo : userInfo.introduction,
 }
 
 const store = new Vuex.Store({

@@ -1,5 +1,5 @@
-import { login, getInfo } from '@/api/user'
-import { setToken } from '@/utils/auth'
+import { login, logout, getInfo } from '@/api/user'
+import { setToken, setUser, removeToken, removeUser } from '@/utils/auth'
 
 export default {
   login({ commit }, userInfo) {
@@ -34,14 +34,29 @@ export default {
         }
   
         const { name, avatar, introduction } = data
-  
+        
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
-        resolve(data)
+        setUser(data)
+        resolve()
       })
     }).catch(error => {
       reject(error)
     })
+  },
+
+  logout({ commit }) {
+    return new Promise((resolve, reject) => {
+      logout().then(() => {
+        commit('SET_TOKEN', '')
+        removeToken()
+        removeUser()
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+
   }
 }
