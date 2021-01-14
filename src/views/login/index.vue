@@ -107,16 +107,14 @@
         const validate = this.$refs.form.validate()
         if(validate) {
           this.loading = true
-          this.$store.dispatch('login', this.formData)
-          .then(() => {
+          this.$store.dispatch('login', this.formData).then(() => {
             this.$store.dispatch('getInfo').then(() => {
-              console.log(this.$store.getters)
+              this.loading = false
+              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             })
-            this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+          }).catch(error => {
             this.loading = false
-          })
-          .catch(() => {
-            this.loading = false
+            console.log(error)
           })
         } else {
           console.log('error submit!!')

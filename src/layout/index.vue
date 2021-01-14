@@ -2,7 +2,11 @@
   <v-app>
     <navigation />
     <v-main>
-      <router-view />
+      <v-container>
+        <keep-alive include="Create">
+          <router-view />
+        </keep-alive>
+      </v-container>
     </v-main>
   </v-app>
 </template>

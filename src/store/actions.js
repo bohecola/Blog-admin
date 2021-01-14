@@ -38,6 +38,7 @@ export default {
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
+        commit('SET_USER', data)
         setUser(data)
         resolve()
       })

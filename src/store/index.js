@@ -14,6 +14,7 @@ const state = {
   name: userInfo === null ? userInfo : userInfo.name,
   avatar: userInfo === null ? userInfo : userInfo.avatar,
   introduction: userInfo === null ? userInfo : userInfo.introduction,
+  user: userInfo
 }
 
 const store = new Vuex.Store({

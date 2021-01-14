@@ -17,13 +17,14 @@
       <v-list dense nav>
         <v-list-item-group
           v-for="item in menuList"
+          :mandatory="true"
           :key="item.path"
           color="primary"
         >
           <v-subheader v-if="item.meta && item.meta.subtitle" class="pa-1 mt-2 overline">
             {{ item.meta.subtitle }}
           </v-subheader>
-
+          
           <v-list-item
             v-if="item.children.length <= 1"
             :to="`${item.path}`"
@@ -60,9 +61,14 @@
               exact
               link
             >
+              <!-- <v-list-item-icon>
+                <v-icon>{{ i.meta.icon }}</v-icon>
+              </v-list-item-icon> -->
+
               <v-list-item-content>
                 <v-list-item-title>{{ i.meta.title }}</v-list-item-title>
               </v-list-item-content>
+
             </v-list-item>
           </v-list-group>
         </v-list-item-group>
@@ -107,11 +113,11 @@
             >
               <v-avatar color="teal" size="36">
                 <img
-                  v-if="userInfo.avatar !== null"
-                  :src="userInfo.avatar"
-                  :alt="userInfo.name"
+                  v-if="getters.avatar !== null"
+                  :src="getters.avatar"
+                  :alt="getters.name"
                 >
-                <span v-else class="white--text headline">{{ userInfo.name.substr(0, 1) }}</span>
+                <span v-else class="white--text headline">{{ getters.attr }}</span>
               </v-avatar>
             </v-badge>
           </v-btn>
@@ -146,7 +152,6 @@ export default {
     drawer: null,
     mini: false,
     menuList: [],
-    userInfo: {},
     account: [
       { icon: "mdi-account-box-outline", title: "Profile", path: ''},
       { icon: "mdi-email-outline", title: "Email", path: '', },
@@ -156,7 +161,15 @@ export default {
   }),
   created() {
     this.getRoutes()
-    this.getUserInfo()
+  },
+  computed: {
+    getters() {
+      let { name, avatar, introduction } = this.$store.getters
+      let user = {}, attr = null
+      if(name !== null) attr = name.substr(0, 1)
+      user = { name, avatar, introduction, attr }
+      return user
+    }
   },
   methods: {
     getRoutes() {
@@ -167,10 +180,6 @@ export default {
           this.menuList.push(route)
         }
       })
-    },
-    getUserInfo() {
-      const { name, avatar, introduction } = this.$store.getters
-      this.userInfo = { name, avatar, introduction } 
     },
     async accountOperateHandle(item) {
       if(item.title === 'Logout') {

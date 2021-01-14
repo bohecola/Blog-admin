@@ -20,7 +20,7 @@ const routes = [
         component: () => import('@/views/dashboard/index'),
       },
     ]
-  },
+  },  
   {
     path: '/article',
     component: Layout,
@@ -38,10 +38,10 @@ const routes = [
         component: () => import('@/views/article/management')
       },      
       {
-        path: 'editor',
+        path: 'edit/:id',
         hidden: true,
-        meta: { title: 'Editor', icon: 'mdi-square-edit-outline' },
-        component: () => import('@/views/article/editor')
+        meta: { title: 'Edit', icon: 'mdi-square-edit-outline' },
+        component: () => import('@/views/article/edit')
       },
     ]
   },

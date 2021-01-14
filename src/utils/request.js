@@ -22,6 +22,21 @@ service.interceptors.request.use(config => {
 })
 // (2) 响应拦截 
 service.interceptors.response.use(response => {
+  const { config, status, statusText } = response
+  Message({
+    type: 'success',
+    title: 'Service Response Success',
+    message: `
+      <p>url: ${config.url}</p>
+      <p>status: ${status}</p>
+      <p>statusText: ${statusText}</p>
+      <p>baseURL: ${config.baseURL}</p>
+      <p>method: ${config.method}</p>
+    `,
+    collapsable: false,
+    duration: 3 * 1000,
+    supportHTML: true
+  })
   return response
 }, error => {
   // 服务器响应错误状态时返回对应的错误信息
@@ -35,7 +50,7 @@ service.interceptors.response.use(response => {
       <p>message: ${data.message}</p>
     `,
     collapsable: false,
-    duration: 5000,
+    duration: 3 * 1000,
     supportHTML: true
   })
   return Promise.reject(error.response)

@@ -44,20 +44,30 @@
 
 <script>
 import { uploadImage } from '@/api/user'
-import { createArticle } from '@/api/article'
+import { getArticleDetail, updateArticle } from '@/api/article'
 
 import VMdEditor from '@kangc/v-md-editor'
 
 export default {
-  name: 'Create',
+  name: 'Edit',
   data: () => ({
     loading: false,
     formData: {
+      id: null,
       title: '',
       content: ''
     }
   }),
+  created() {
+    this.getData()
+  },
   methods: {
+    getData() {
+      getArticleDetail({id: this.$route.params.id}).then(response => {
+        const { id, title, content } = response.data
+        this.formData = { id, title, content }
+      })
+    },
     handleUploadImage (event, insertImage, files) {
       const file = files.shift()
       let formData = new FormData()
@@ -77,9 +87,8 @@ export default {
       const validate = title && content
       if(validate) {
         this.loading = true
-        createArticle(this.formData).then(respones => {
+        updateArticle(this.formData).then(respones => {
           this.loading = false
-          this.clearFormData()
         }).catch(error => {
           this.loading = false
           console.log(error)
@@ -96,6 +105,6 @@ export default {
       this.$refs.form.reset()
       this.formData.content= ''
     }
-  }
+  }  
 }
 </script>

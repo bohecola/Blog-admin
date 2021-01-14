@@ -34,8 +34,9 @@ export const getInfo = () => request({
 })
 
 // 上传用户头像
-export const uploadAvatar = (data) => request({
+export const uploadImage = (data) => request({
   url: '/api/v1/images',
+  headers: { 'Content-Type' : 'mutipart/formdata' },
   method: 'post',
   data
 })

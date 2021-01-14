@@ -14,7 +14,7 @@ export const updateArticle = (data) => request({
   data
 })
 
-// '删' 博文 -> 参数({id: 博文id})
+// '删' 博文 
 export const delArticle = (param) => request({
   url: '/api/v1/articles',
   method: 'delete',
