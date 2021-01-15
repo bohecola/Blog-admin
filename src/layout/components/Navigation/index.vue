@@ -19,7 +19,6 @@
           v-for="item in menuList"
           :mandatory="true"
           :key="item.path"
-          color="primary"
         >
           <v-subheader v-if="item.meta && item.meta.subtitle" class="pa-1 mt-2 overline">
             {{ item.meta.subtitle }}
