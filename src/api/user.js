@@ -21,7 +21,7 @@ export const login = (data) => request({
   data
 })
 
-//  用户登出移除Token
+// 用户登出移除Token
 export const logout = () => request({
   url: '/api/v1/authorizations/current',
   method: 'delete'

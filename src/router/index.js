@@ -10,13 +10,18 @@ const routes = [
   {
     path: '/',
     component: Layout,
+    hidden: true,
     redirect: '/dashboard',
+  },
+  {
+    path: '/dashboard',
+    component: Layout,
     open: true,
     meta: { title: 'Dashboard', icon: 'mdi-monitor-dashboard' },
     children: [
       {
-        path: 'dashboard',
-        meta: { title: 'Dashboard', icon: 'mdi-monitor-dashboard' },
+        path: '',
+        meta: { title: 'Dashboard'},
         component: () => import('@/views/dashboard/index'),
       },
     ]
