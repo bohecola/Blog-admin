@@ -4,8 +4,8 @@
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="mini"
-      app
       class="elevation-1"
+      app
     >
       <!-- drawer title -->
       <v-list-item class="mt-4">
@@ -14,11 +14,12 @@
       
       <v-divider></v-divider>
       <!-- drawer menu -->
-      <v-list dense nav>
+      <v-list dense nav> 
         <v-list-item-group
           v-for="item in menuList"
           :mandatory="true"
           :key="item.path"
+          color=""
         >
           <v-subheader v-if="item.meta && item.meta.subtitle" class="pa-1 mt-2 overline">
             {{ item.meta.subtitle }}
@@ -28,7 +29,6 @@
             v-if="item.children.length <= 1"
             :to="`${item.path}`"
             exact
-            exact-active-class="primary--text"
           >
             <v-list-item-icon>
               <v-icon>
@@ -46,6 +46,7 @@
             :prepend-icon="item.meta.icon"
             :value="item.open"
             no-action
+            color=""
           >
             <template v-slot:activator>
               <v-list-item-title>
@@ -58,10 +59,9 @@
               :key="i.path"
               :to="`${item.path}/${i.path}`"
               exact
-              link
             >
               <!-- <v-list-item-icon>
-                <v-icon>{{ i.meta.icon }}</v-icon>
+                <v-icon>mdi-circle-medium</v-icon>
               </v-list-item-icon> -->
 
               <v-list-item-content>
@@ -75,10 +75,10 @@
     </v-navigation-drawer>
     
     <!-- app bar -->
-    <v-app-bar color="h-bg" app>
+    <v-app-bar color="h-bg" style="color: rgba(0, 0, 0, 0.6)" app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>{{ getters.name }} 's Blog</v-toolbar-title>
 
       <v-spacer></v-spacer>
 

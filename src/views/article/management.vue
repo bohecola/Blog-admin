@@ -5,9 +5,9 @@
         <v-list-item-group>
           <template v-for="(item, i) in articleList">
             <v-list-item :key="item.title + i" :to="'/article/edit/'+ item.id">
-              <v-list-item-content>
+              <v-list-item-content style="font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Helvetica, STKaiti, SimSun, serif; color: rgba(0, 0, 0, 0.6);">
                 <v-list-item-title v-text="item.title"></v-list-item-title>
-                <v-list-item-subtitle v-text="item.created_at"></v-list-item-subtitle>
+                <v-list-item-subtitle v-text="item.created_at" style="margin-top: 5px;"></v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-action>
                 <v-btn icon @click.prevent="delClick(item)">

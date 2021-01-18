@@ -30,7 +30,7 @@ const routes = [
     path: '/article',
     component: Layout,
     open: false,
-    meta: { title: 'Artcile', subtitle: 'Content Management', icon: 'mdi-book-multiple-outline' },
+    meta: { title: 'Artcile', subtitle: 'Content Management', icon: 'mdi-book-open-outline' },
     children: [
       {
         path: 'create',

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="overflow-hidden" color="blue-grey darken-1" dark>
-      <v-toolbar flat color="blue-grey">
+      <v-toolbar color="blue-grey" flat>
         <v-icon class="mr-1">mdi-newspaper-variant-outline</v-icon>
         <v-toolbar-title class="font-weight-light">Start writing</v-toolbar-title>
         <v-spacer></v-spacer>
